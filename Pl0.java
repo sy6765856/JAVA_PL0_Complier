@@ -19,5 +19,6 @@ public class Pl0
         }
         LexiAnalyse Lexi=new LexiAnalyse(file_name);
         Parsing Pars=new Parsing(Lexi);
+        Pars.interpret();
     }
 }

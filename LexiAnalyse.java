@@ -100,8 +100,8 @@ public class LexiAnalyse
 				GetCh();
 			}
 			charNum2 = index;
-            System.out.println(charNum1);
-            System.out.println(charNum2);
+            //System.out.println(charNum1);
+            //System.out.println(charNum2);
 			if ((charNum2 - charNum1) > al)
             {
 				new error(lineNum, 19);
@@ -124,7 +124,6 @@ public class LexiAnalyse
             {
 				n++;
 			}
-            System.out.println(tokenName);
 			if (n == 13)
 			{
 				return new token(tokenName, "ident", lineNum);
