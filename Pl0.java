@@ -18,5 +18,6 @@ public class Pl0
             System.out.println("error!Please input file name:");   
         }
         LexiAnalyse Lexi=new LexiAnalyse(file_name);
+        Parsing Pars=new Parsing(Lexi);
     }
 }

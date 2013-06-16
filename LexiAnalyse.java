@@ -15,7 +15,7 @@ public class LexiAnalyse
 
     public LexiAnalyse(String file_name)
     {
-        word = new token[130];
+        word = new token[13];
 		word[0] = new token("begin", "beginsym");
 		word[1] = new token("call", "callsym");
 		word[2] = new token("const", "constsym");
@@ -44,12 +44,6 @@ public class LexiAnalyse
 			}
 			index = 0;
 			GetCh();
-            GetToken();
-            while((word[word_cnt]=GetToken())!=null)
-            {
-                //System.out.println(word[word_cnt].lineNum);
-                word_cnt++;
-            }
         }
         catch (FileNotFoundException a)
         {
