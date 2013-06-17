@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
-public class Parsing
+import java.io.*;
+public class Parsing implements ByteCode
 {
 	public LexiAnalyse Lexi;
 	public token word;
@@ -795,10 +796,11 @@ public class Parsing
 
     public void print_code(String file_name)
     {
+        BYTE_Code Cseg=new BYTE_Code();
+        //Cseg.emit1(1);
+        //System.out.println(Cseg.cp);
         s[1] = 0;
 		s[2] = 0;
-		// s[3]=0;
-		System.out.println("start pl/0");
 		do {
 			i = (pcode) pcodeArray.get(p);
 			p++;
@@ -959,6 +961,5 @@ public class Parsing
 				t--;
 			}
 		}while (p != 0);
-		System.out.println("end pl/0");
     }
 }
