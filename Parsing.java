@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
-//import com.sun.tools.javac.jvm.Code.*;
 public class Parsing
 {
 	public LexiAnalyse Lexi;
@@ -794,10 +793,172 @@ public class Parsing
 		System.out.println("end pl/0");
 	}
 
-    public void print_code()
+    public void print_code(String file_name)
     {
-        Code code= new Code();
-        code.emit1(3);
-        System.out.println(code.cp);
+        s[1] = 0;
+		s[2] = 0;
+		// s[3]=0;
+		System.out.println("start pl/0");
+		do {
+			i = (pcode) pcodeArray.get(p);
+			p++;
+			if (i.getF().equals("lit"))
+            {
+				t++;
+				s[t] = i.getA();
+			}
+            else if (i.getF().equals("opr"))
+            {
+				if (i.getA() == 0)
+                {
+					t = b - 1;
+					p = s[t + 3];
+					b = s[t + 2];
+				}
+                else if (i.getA() == 1)
+				{
+					s[t] = -s[t];
+				}
+                else if (i.getA() == 2)
+				{
+					t--;
+					s[t] = s[t] + s[t + 1];
+				}
+                else if (i.getA() == 3)
+				{
+					t--;
+					s[t] = s[t] - s[t + 1];
+				}
+                else if (i.getA() == 4)
+				{
+					t--;
+					s[t] = s[t] * s[t + 1];
+				}
+                else if (i.getA() == 5)
+				{
+					t--;
+					s[t] = s[t] / s[t + 1];
+				}
+                else if (i.getA() == 6)
+				{
+					if (s[t] % 2 == 0)
+						s[t] = 0;
+					else
+						s[t] = 1;
+				}
+                else if (i.getA() == 8)
+				{
+					t--;
+					if (s[t] == s[t + 1])
+						s[t] = 1;
+					else
+						s[t] = 0;
+				}
+                else if (i.getA() == 9)
+				{
+					t--;
+					if (s[t] == s[t + 1])
+						s[t] = 0;
+					else
+						s[t] = 1;
+				}
+                else if (i.getA() == 10)
+				{
+					t--;
+					if (s[t] < s[t + 1])
+						s[t] = 1;
+					else
+						s[t] = 0;
+				}
+                else if (i.getA() == 11)
+				{
+					t--;
+					if (s[t] >= s[t + 1])
+						s[t] = 1;
+					else
+						s[t] = 0;
+				}
+                else if (i.getA() == 12)
+				{
+					t--;
+					if (s[t] > s[t + 1])
+						s[t] = 1;
+					else
+						s[t] = 0;
+				}
+                else if (i.getA() == 13)
+				{
+					t--;
+					if (s[t] <= s[t + 1])
+						s[t] = 1;
+					else
+						s[t] = 0;
+				}
+                else if (i.getA() == 14)
+				{
+					System.out.println(s[t]);
+					t--;
+				}
+                else if (i.getA() == 15)
+				{
+					System.out.println();
+				}
+                else if (i.getA() == 16)
+				{
+					System.out.println("Please enter a number (0 exit):");
+					int age;
+					try {
+						InputStreamReader fin = new InputStreamReader(System.in);
+						BufferedReader br = new BufferedReader(fin);
+						String name = br.readLine();
+						age = Integer.parseInt(name);
+					}
+                    catch (Exception e)
+                    {
+						age = 0;
+					}
+					t++;
+					s[t] = age;
+				}
+			}
+            else if (i.getF().equals("lod"))
+            {
+				t++;
+				s[t] = s[base(i.getL()) + i.getA()];
+			}
+            else if (i.getF().equals("sto"))
+            {
+				s[base(i.getL()) + i.getA()] = s[t];
+				t--;
+			}
+            else if (i.getF().equals("cal"))
+            {
+				s[t + 1] = base(i.getL());
+				s[t + 2] = b;
+				s[t + 3] = p;
+				b = t + 1;
+				p = i.getA();
+			}
+            else if (i.getF().equals("int"))
+            {
+				t = t + i.getA();
+			}
+            else if (i.getF().equals("jmp"))
+            {
+				p = i.getA();
+			}
+            else if (i.getF().equals("jpc"))
+            {
+				if (s[t] == 0)
+					p = i.getA();
+				t--;
+			}
+            else if (i.getF().equals("wrt"))
+            {
+				System.out.println(s[t]);
+				t--;
+			}
+		}while (p != 0);
+		System.out.println("end pl/0");
     }
 }

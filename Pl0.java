@@ -19,8 +19,8 @@ public class Pl0
         }
         LexiAnalyse Lexi=new LexiAnalyse(file_name);
         Parsing Pars=new Parsing(Lexi);
-        Pars.print_code();
-        //Pars.printPode();
+        Pars.print_code(file_name);
+        Pars.printPode();
         Pars.interpret();        
     }
 }
