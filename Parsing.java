@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
-
+//import com.sun.tools.javac.jvm.Code.*;
 public class Parsing
 {
 	public LexiAnalyse Lexi;
@@ -35,7 +35,7 @@ public class Parsing
 		return error_number;
 	}
 
-	public void printCode()
+	public void printPode()
 	{
 		for (int n = 0; n < pcodeArray.size(); n++) {
 			pcode code = (pcode) pcodeArray.get(n);
@@ -793,4 +793,11 @@ public class Parsing
 		}while (p != 0);
 		System.out.println("end pl/0");
 	}
+
+    public void print_code()
+    {
+        Code code= new Code();
+        code.emit1(3);
+        System.out.println(code.cp);
+    }
 }
