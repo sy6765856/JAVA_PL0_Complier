@@ -1,5 +1,5 @@
-const a=10;
 var b,c;
+const a=10;
 procedure p;
   begin
     c:=b+a

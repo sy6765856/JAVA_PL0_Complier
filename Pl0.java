@@ -18,7 +18,7 @@ public class Pl0
             System.out.println("error!Please input file name:");   
         }
         LexiAnalyse Lexi=new LexiAnalyse(file_name);
-        Parsing Pars=new Parsing(Lexi);
+        Parsing Pars=new Parsing(Lexi,file_name);
         int errors=Lexi.error_number+Pars.error_number;
         System.out.println("Errors:"+errors);    
         if(errors==0)
