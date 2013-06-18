@@ -17,6 +17,30 @@ public class read
         } catch(Exception e){}
         return ans;
     }
+    public static void attributes_read(FileInputStream is,FileOutputStream os)
+    {
+        bytesread(2,is,os);
+        int length=bytesread(4,is,os);
+        bytesread(length,is,os);
+    }
+    public static void methods_read(FileInputStream is,FileOutputStream os)
+    {
+        bytesread(2,is,os);
+        bytesread(2,is,os);
+        bytesread(2,is,os);
+        int cnt=bytesread(2,is,os);
+        for(int i=0;i<cnt;i++)
+            attributes_read(is,os);
+    }
+    public static void fields_read(FileInputStream is,FileOutputStream os)
+    {
+        bytesread(2,is,os);
+        bytesread(2,is,os);
+        bytesread(2,is,os);
+        int cnt=bytesread(2,is,os);
+        for(int i=0;i<cnt;i++)
+            attributes_read(is,os);
+    }
     public static void main(String[] args)
     {
         ClassFile Fl=new ClassFile();
@@ -27,7 +51,7 @@ public class read
             FileOutputStream os = new FileOutputStream(new File("out.class"));
             bytesread(8,is,os);//magic and version
             int pool_cnt=bytesread(2,is,os);//pool count
-            //System.out.println(pool_cnt);
+            System.out.println("pool:"+pool_cnt);
             
             for(int i=1;i<pool_cnt;i++)
             {
@@ -81,7 +105,7 @@ public class read
                 }
             }
             int access_flags=bytesread(2,is,os);
-            System.out.println(access_flags);
+            System.out.println("access_flags:"+access_flags);
             int this_class=bytesread(2,is,os);
             int super_class=bytesread(2,is,os);
             int interfaces_count=bytesread(2,is,os);
@@ -89,9 +113,22 @@ public class read
             {
             }
             int fields_count=bytesread(2,is,os);
+            System.out.println("fields:"+fields_count);
             for(int i=0;i<fields_count;i++)
             {
-                
+                fields_read(is,os);
+            }
+            int methods_count=bytesread(2,is,os);
+            System.out.println("methods:"+methods_count);
+            for(int i=0;i<methods_count;i++)
+            {
+                methods_read(is,os);
+            }
+            int attributes_count=bytesread(2,is,os);
+            System.out.println("attributes:"+attributes_count);
+            for(int i=0;i<attributes_count;i++)
+            {
+                attributes_read(is,os);
             }
         }
         catch(Exception e){}
