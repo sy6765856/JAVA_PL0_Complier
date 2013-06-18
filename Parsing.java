@@ -13,7 +13,6 @@ public class Parsing implements ByteCode
 	int cx0;
 	int dx;
 	int lev = -1;
-	int errorNum = 0;
 	public int t = -1;
 	final public int stacksize = 500;
 	public int p = 0;
@@ -629,7 +628,7 @@ public class Parsing implements ByteCode
     {
 		s[1] = 0;
 		s[2] = 0;
-		// s[3]=0;
+        printPode();
 		System.out.println("start pl/0");
 		do {
 			i = (pcode) pcodeArray.get(p);
@@ -793,7 +792,6 @@ public class Parsing implements ByteCode
 		}while (p != 0);
 		System.out.println("end pl/0");
 	}
-
     public void print_code(String file_name)
     {
         BYTE_Code Cseg=new BYTE_Code();

@@ -19,8 +19,12 @@ public class Pl0
         }
         LexiAnalyse Lexi=new LexiAnalyse(file_name);
         Parsing Pars=new Parsing(Lexi);
-        Pars.print_code(file_name);
-        Pars.printPode();
-        Pars.interpret();        
+        int errors=Lexi.error_number+Pars.error_number;
+        System.out.println("Errors:"+errors);    
+        if(errors==0)
+        {
+            //Pars.print_code(file_name);
+            Pars.interpret();
+        }
     }
 }
